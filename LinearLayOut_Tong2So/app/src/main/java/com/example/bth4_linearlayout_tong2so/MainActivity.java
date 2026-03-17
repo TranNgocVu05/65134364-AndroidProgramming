@@ -1,10 +1,8 @@
 package com.example.bth4_linearlayout_tong2so;
-
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
@@ -46,10 +44,10 @@ public class MainActivity extends AppCompatActivity {
        String soThu1 = editTextS1.getText().toString();
         String soThu2 = editTextS2.getText().toString();
         // chuyen du lieu tu chuoi sang so
-        float so1 = Float.parseFloat(soThu1);
-        float so2 = Float.parseFloat(soThu2);
+        float num1 = Float.parseFloat(soThu1);
+        float num2 = Float.parseFloat(soThu2);
         //tinh toan
-        float tong = so1+so2;
+        float tong = num1+num2;
         // hien ket qua
         // chuan bi du lieu xuat
         String chuoiKq = String.valueOf(tong);
