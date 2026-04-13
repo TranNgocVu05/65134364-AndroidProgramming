@@ -1,64 +1,100 @@
 package NgocVu.myapplication;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Cau3Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Cau3Fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    RecyclerView rvBaiThuoc;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    class BaiThuoc {
+        String ten;
+        String moTa;
+        int hinhAnh;
+
+        public BaiThuoc(String ten, String moTa, int hinhAnh) {
+            this.ten = ten;
+            this.moTa = moTa;
+            this.hinhAnh = hinhAnh;
+        }
+    }
 
     public Cau3Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Cau3Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static Cau3Fragment newInstance(String param1, String param2) {
-        Cau3Fragment fragment = new Cau3Fragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cau3, container, false);
+        View view = inflater.inflate(R.layout.fragment_cau3, container, false);
+
+        rvBaiThuoc = view.findViewById(R.id.rvBaiThuoc);
+        rvBaiThuoc.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        List<BaiThuoc> dsBaiThuoc = new ArrayList<>();
+
+        dsBaiThuoc.add(new BaiThuoc("Bài thuốc trị ho", "Thời gian uống: sau khi ăn", R.mipmap.hung));
+        dsBaiThuoc.add(new BaiThuoc("Bài thuốc giải cảm", "Thời gian uống: sau khi ăn", R.drawable.giaicam));
+        dsBaiThuoc.add(new BaiThuoc("Bài thuốc bổ não", "Thời gian uống: sau khi ăn", R.drawable.bonao));
+        dsBaiThuoc.add(new BaiThuoc("Bài thuốc đau bụng", "Thời gian uống: sau khi ăn", R.drawable.daubung));
+
+        rvBaiThuoc.setAdapter(new MyAdapter(dsBaiThuoc));
+
+        return view;
+    }
+
+    class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+        List<BaiThuoc> data;
+
+        public MyAdapter(List<BaiThuoc> data) {
+            this.data = data;
+        }
+
+        @NonNull
+        @Override
+        public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_bai_thuoc, parent, false);
+            return new MyViewHolder(v);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+            BaiThuoc item = data.get(position);
+            holder.tvTen.setText(item.ten);
+            holder.tvMoTa.setText(item.moTa);
+            holder.imgHinh.setImageResource(item.hinhAnh);
+            
+            holder.itemView.setOnClickListener(v -> 
+                Toast.makeText(getContext(), "Bạn chọn: " + item.ten, Toast.LENGTH_SHORT).show()
+            );
+        }
+
+        @Override
+        public int getItemCount() {
+            return data.size();
+        }
+
+        class MyViewHolder extends RecyclerView.ViewHolder {
+            TextView tvTen, tvMoTa;
+            ImageView imgHinh;
+            public MyViewHolder(@NonNull View itemView) {
+                super(itemView);
+                tvTen = itemView.findViewById(R.id.tvTenThuoc);
+                tvMoTa = itemView.findViewById(R.id.tvMoTa);
+                imgHinh = itemView.findViewById(R.id.imgThuoc);
+            }
+        }
     }
 }

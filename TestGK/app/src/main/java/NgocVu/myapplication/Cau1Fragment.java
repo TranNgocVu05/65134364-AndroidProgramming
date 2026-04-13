@@ -1,19 +1,21 @@
 package NgocVu.myapplication;
 
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
 public class Cau1Fragment extends Fragment {
 
-    EditText editTextS1, editTextS2, editTextKq;
-    Button nutCong, nutTru, nutNhan, nutChia;
+    EditText edtChieuCao, edtCanNang;
+    Button btnTinhBMI;
+    TextView tvKetQua;
 
     public Cau1Fragment() {
     }
@@ -21,71 +23,53 @@ public class Cau1Fragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View view = inflater.inflate(R.layout.fragment_cau1, container, false);
 
-        // Ánh xạ view
-        editTextS1 = view.findViewById(R.id.edtS1);
-        editTextS2 = view.findViewById(R.id.edtS2);
-        editTextKq = view.findViewById(R.id.edtKq);
+        edtChieuCao = view.findViewById(R.id.edtChieuCao);
+        edtCanNang = view.findViewById(R.id.edtCanNang);
+        btnTinhBMI = view.findViewById(R.id.btnTinhBMI);
+        tvKetQua = view.findViewById(R.id.tvKetQua);
 
-        nutCong = view.findViewById(R.id.btnCong);
-        nutTru = view.findViewById(R.id.btnTru);
-        nutNhan = view.findViewById(R.id.btnNhan);
-        nutChia = view.findViewById(R.id.btnChia);
-
-        // Bắt sự kiện
-        nutCong.setOnClickListener(v -> XuLyCong());
-        nutTru.setOnClickListener(v -> XuLyTru());
-        nutNhan.setOnClickListener(v -> XuLyNhan());
-        nutChia.setOnClickListener(v -> XuLyChia());
+        btnTinhBMI.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                tinhBMI();
+            }
+        });
 
         return view;
     }
 
-    float[] laySo() {
-        String s1 = editTextS1.getText().toString().trim();
-        String s2 = editTextS2.getText().toString().trim();
+    private void tinhBMI() {
+        String chieuCaoStr = edtChieuCao.getText().toString();
+        String canNangStr = edtCanNang.getText().toString();
 
-        if (TextUtils.isEmpty(s1) || TextUtils.isEmpty(s2)) {
-            editTextKq.setText("Nhập đủ 2 số");
-            return null;
-        }
-
-        float num1 = Float.parseFloat(s1);
-        float num2 = Float.parseFloat(s2);
-
-        return new float[]{num1, num2};
-    }
-
-    void XuLyCong() {
-        float[] nums = laySo();
-        if (nums == null) return;
-        editTextKq.setText(String.valueOf(nums[0] + nums[1]));
-    }
-
-    void XuLyTru() {
-        float[] nums = laySo();
-        if (nums == null) return;
-        editTextKq.setText(String.valueOf(nums[0] - nums[1]));
-    }
-
-    void XuLyNhan() {
-        float[] nums = laySo();
-        if (nums == null) return;
-        editTextKq.setText(String.valueOf(nums[0] * nums[1]));
-    }
-
-    void XuLyChia() {
-        float[] nums = laySo();
-        if (nums == null) return;
-
-        if (nums[1] == 0) {
-            editTextKq.setText("Không chia cho 0");
+        if (chieuCaoStr.isEmpty() || canNangStr.isEmpty()) {
+            Toast.makeText(getActivity(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        editTextKq.setText(String.valueOf(nums[0] / nums[1]));
-    }
+        float chieuCao = Float.parseFloat(chieuCaoStr);
+        float canNang = Float.parseFloat(canNangStr);
 
+        if (chieuCao <= 0) {
+            Toast.makeText(getActivity(), "Chiều cao phải lớn hơn 0", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        float bmi = canNang / (chieuCao * chieuCao);
+        String thongBao = "";
+
+        if (bmi < 18.5) {
+            thongBao = "Gầy";
+        } else if (bmi < 24.9) {
+            thongBao = "Bình thường";
+        } else if (bmi < 29.9) {
+            thongBao = "Tiền béo phì";
+        } else {
+            thongBao = "Béo phì";
+        }
+
+        tvKetQua.setText(String.format("BMI: %.2f\nTrạng thái: %s", bmi, thongBao));
+    }
 }
