@@ -25,7 +25,6 @@ public class Cau3Fragment extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         List<DiaDiem> dsDiaDiem = new ArrayList<>();
-        // Đã đổi thành R.mipmap.thaptramhuong
         dsDiaDiem.add(new DiaDiem("Tháp Bà Ponagar", "2 Thắng 4, Vĩnh Phước, Nha Trang", R.mipmap.thapba));
         dsDiaDiem.add(new DiaDiem("Chùa Long Sơn", "20 Đường 23/10, Phương Sơn, Nha Trang", R.mipmap.chualongson));
         dsDiaDiem.add(new DiaDiem("VinWonders Nha Trang", "Đảo Hòn Tre, Nha Trang", R.mipmap.vinpear));
