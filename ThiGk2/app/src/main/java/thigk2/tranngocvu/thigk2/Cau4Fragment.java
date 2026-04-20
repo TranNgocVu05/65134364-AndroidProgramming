@@ -8,11 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Cau4Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class Cau4Fragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -34,7 +30,7 @@ public class Cau4Fragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Cau4Fragment.
+     * @return A new instance of fragment Cau5Fragment.
      */
     // TODO: Rename and change types and number of parameters
     public static Cau4Fragment newInstance(String param1, String param2) {
