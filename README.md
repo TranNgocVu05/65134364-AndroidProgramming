@@ -25,4 +25,19 @@ lưu các bài thực hành , bài tập , dự án về Android
 
 <img width="1494" height="1010" alt="bth13" src="https://github.com/user-attachments/assets/940af4fc-d16a-43f2-96bf-1fcb5b72e879" />
 
+### Bài thi giữa kì 2
 
+### câu 1 tính chu vi diện tích
+
+<img width="401" height="780" alt="cau1chuvi" src="https://github.com/user-attachments/assets/5eb2924e-154c-4e43-80f1-98f04abf6c3c" />
+<img width="396" height="786" alt="cau1dientich" src="https://github.com/user-attachments/assets/07ace618-23bf-4a84-b682-0ee413994ac2" />
+
+### Câu 2 hiển thị danh mục
+
+<img width="363" height="776" alt="cau2danhmuc" src="https://github.com/user-attachments/assets/caf4eef1-ac67-48cc-9bf1-ff8b72a7ff12" />
+### câu 3 Địa điểm du lịch
+
+<img width="359" height="782" alt="cau3diadiem" src="https://github.com/user-attachments/assets/4c3c2d62-d670-430d-80a5-282e1098e7bf" />
+### câu 4 Thông tin sinh viên
+
+<img width="368" height="776" alt="cau4thongtin" src="https://github.com/user-attachments/assets/f3f720b6-86e7-4487-b006-8150e839f0ea" />
