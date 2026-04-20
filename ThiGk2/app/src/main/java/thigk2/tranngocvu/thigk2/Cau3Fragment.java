@@ -12,10 +12,6 @@ import java.util.List;
 
 public class Cau3Fragment extends Fragment {
 
-    private RecyclerView recyclerView;
-    private DiaDiemAdapter adapter;
-    private List<DiaDiem> dsDiaDiem;
-
     public Cau3Fragment() {
         // Required empty public constructor
     }
@@ -25,18 +21,18 @@ public class Cau3Fragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_cau3, container, false);
 
-        recyclerView = view.findViewById(R.id.recyclerViewCau3);
+        RecyclerView recyclerView = view.findViewById(R.id.recyclerViewCau3);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        List<DiaDiem> dsDiaDiem = new ArrayList<>();
+        // Đã đổi thành R.mipmap.thaptramhuong
+        dsDiaDiem.add(new DiaDiem("Tháp Bà Ponagar", "2 Thắng 4, Vĩnh Phước, Nha Trang", R.mipmap.thaptramhuong));
+        dsDiaDiem.add(new DiaDiem("Chùa Long Sơn", "20 Đường 23/10, Phương Sơn, Nha Trang", R.mipmap.thaptramhuong));
+        dsDiaDiem.add(new DiaDiem("VinWonders Nha Trang", "Đảo Hòn Tre, Nha Trang", R.mipmap.thaptramhuong));
+        dsDiaDiem.add(new DiaDiem("Viện Hải dương học", "01 Cầu Đá, Nha Trang", R.mipmap.thaptramhuong));
+        dsDiaDiem.add(new DiaDiem("Hòn Chồng", "Vĩnh Phước, Nha Trang", R.mipmap.thaptramhuong));
 
-        dsDiaDiem = new ArrayList<>();
-        dsDiaDiem.add(new DiaDiem("Tháp Bà Ponagar", "2 Thắng 4, Vĩnh Phước, Nha Trang", R.mipmap.thapTramHuong));
-        dsDiaDiem.add(new DiaDiem("Chùa Long Sơn", "20 Đường 23/10, Phương Sơn, Nha Trang", R.mipmap.thapTramHuong));
-        dsDiaDiem.add(new DiaDiem("VinWonders Nha Trang", "Đảo Hòn Tre, Nha Trang", R.mipmap.thapTramHuong));
-        dsDiaDiem.add(new DiaDiem("Viện Hải dương học", "01 Cầu Đá, Nha Trang", R.mipmap.thapTramHuong));
-        dsDiaDiem.add(new DiaDiem("Hòn Chồng", "Vĩnh Phước, Nha Trang", R.mipmap.thapTramHuong));
-
-        adapter = new DiaDiemAdapter(dsDiaDiem);
+        DiaDiemAdapter adapter = new DiaDiemAdapter(dsDiaDiem);
         recyclerView.setAdapter(adapter);
 
         return view;
