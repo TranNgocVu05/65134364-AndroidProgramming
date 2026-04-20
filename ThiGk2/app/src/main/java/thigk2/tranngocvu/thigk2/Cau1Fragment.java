@@ -13,8 +13,8 @@ import android.widget.Toast;
 public class Cau1Fragment extends Fragment {
 
     EditText edtChieuDai, edtChieuRong;
-    Button btnTinh;
-    TextView tvChuVi, tvDienTich;
+    Button btnChuVi, btnDienTich;
+    TextView tvKetQua;
 
     public Cau1Fragment() {
         // Required empty public constructor
@@ -28,40 +28,63 @@ public class Cau1Fragment extends Fragment {
         // Ánh xạ view
         edtChieuDai = view.findViewById(R.id.edtChieuDai);
         edtChieuRong = view.findViewById(R.id.edtChieuRong);
-        btnTinh = view.findViewById(R.id.btnTinh);
-        tvChuVi = view.findViewById(R.id.tvChuVi);
-        tvDienTich = view.findViewById(R.id.tvDienTich);
+        btnChuVi = view.findViewById(R.id.btnChuVi);
+        btnDienTich = view.findViewById(R.id.btnDienTich);
+        tvKetQua = view.findViewById(R.id.tvKetQua);
 
-        btnTinh.setOnClickListener(new View.OnClickListener() {
+        btnChuVi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TinhToan();
+                TinhChuVi();
+            }
+        });
+
+        btnDienTich.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TinhDienTich();
             }
         });
 
         return view;
     }
 
-    void TinhToan() {
+    void TinhChuVi() {
         String strDai = edtChieuDai.getText().toString();
         String strRong = edtChieuRong.getText().toString();
 
-        if (strDai.isEmpty() || strRong.isEmpty()) {
-            Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        try {
+        if (validateInput(strDai, strRong)) {
             double dai = Double.parseDouble(strDai);
             double rong = Double.parseDouble(strRong);
-
             double chuVi = (dai + rong) * 2;
-            double dienTich = dai * rong;
+            tvKetQua.setText("Chu vi: " + chuVi);
+        }
+    }
 
-            tvChuVi.setText("Chu vi: " + chuVi);
-            tvDienTich.setText("Diện tích: " + dienTich);
+    void TinhDienTich() {
+        String strDai = edtChieuDai.getText().toString();
+        String strRong = edtChieuRong.getText().toString();
+
+        if (validateInput(strDai, strRong)) {
+            double dai = Double.parseDouble(strDai);
+            double rong = Double.parseDouble(strRong);
+            double dienTich = dai * rong;
+            tvKetQua.setText("Diện tích: " + dienTich);
+        }
+    }
+
+    boolean validateInput(String strDai, String strRong) {
+        if (strDai.isEmpty() || strRong.isEmpty()) {
+            Toast.makeText(getContext(), "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        try {
+            Double.parseDouble(strDai);
+            Double.parseDouble(strRong);
+            return true;
         } catch (NumberFormatException e) {
             Toast.makeText(getContext(), "Dữ liệu không hợp lệ", Toast.LENGTH_SHORT).show();
+            return false;
         }
     }
 }

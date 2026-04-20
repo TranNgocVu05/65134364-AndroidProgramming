@@ -93,15 +93,31 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/btnTinh"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/linearLayoutButtons"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Tính Chu vi &amp; Diện tích"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/btnChuVi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="Tính Chu vi" />
+
+        <Button
+            android:id="@+id/btnDienTich"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tính Diện tích" />
+
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/layoutKetQua"
@@ -112,24 +128,14 @@
         android:padding="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnTinh">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutButtons">
 
         <TextView
-            android:id="@+id/tvChuVi"
+            android:id="@+id/tvKetQua"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chu vi: "
+            android:text="Kết quả: "
             android:textColor="#F44336"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvDienTich"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Diện tích: "
-            android:textColor="#4CAF50"
             android:textSize="20sp"
             android:textStyle="bold" />
 

@@ -42,7 +42,7 @@ public class Cau2Fragment extends Fragment {
         dsTenMonAn= new ArrayList<String>();// Tạo thể hiện cụ thể , xin mới
         //thêm dữ liệu
         // ten mon
-        dsTenMonAn.add("Món Ăn 1");
+        dsTenMonAn.add("");
         dsTenMonAn.add("Món Ăn 2");
         dsTenMonAn.add("Món Ăn 3");
         dsTenMonAn.add("Món Ăn 4");
