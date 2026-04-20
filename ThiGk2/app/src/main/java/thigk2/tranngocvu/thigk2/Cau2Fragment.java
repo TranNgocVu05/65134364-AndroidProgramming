@@ -1,5 +1,7 @@
 package thigk2.tranngocvu.thigk2;
 
+iimport android.content.Intent;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,41 +9,21 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Toast;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link Cau2Fragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import java.util.ArrayList;
+
+
 public class Cau2Fragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public Cau2Fragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment Cau2Fragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    ArrayList<String> dsTenMonAn;// Khai báo
     public static Cau2Fragment newInstance(String param1, String param2) {
         Cau2Fragment fragment = new Cau2Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+
         fragment.setArguments(args);
         return fragment;
     }
@@ -49,16 +31,44 @@ public class Cau2Fragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cau2, container, false);
+        View view = inflater.inflate(R.layout.fragment_cau2, container, false);
+        dsTenMonAn= new ArrayList<String>();// Tạo thể hiện cụ thể , xin mới
+        //thêm dữ liệu
+        // ten mon
+        dsTenMonAn.add("Món Ăn 1");
+        dsTenMonAn.add("Món Ăn 2");
+        dsTenMonAn.add("Món Ăn 3");
+        dsTenMonAn.add("Món Ăn 4");
+        dsTenMonAn.add("Món Ăn 5");
+        dsTenMonAn.add("Món Ăn 6");
+
+        ArrayAdapter<String> adapterMonAn;
+        adapterMonAn = new ArrayAdapter<>(getContext(),
+                R.layout.item_center,
+                R.id.tvItem,
+                dsTenMonAn
+        );
+        // Sửa lỗi sai ID ở đây: lvDanhSachMonAn -> lvDSMonAn
+        ListView lvTenMonAn = view.findViewById(R.id.lvDSMonAn);
+        lvTenMonAn.setAdapter(adapterMonAn);
+        lvTenMonAn.setOnItemClickListener(BoLangNgheVaXL);
+        return view;
     }
+
+    AdapterView.OnItemClickListener BoLangNgheVaXL = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int i, long l) {
+            String strTenMonAn = dsTenMonAn.get(i);
+            Intent intent = new Intent(getContext(), ChiTietMonAn.class);
+            intent.putExtra("tenMon", strTenMonAn);
+            startActivity(intent);
+        }
+    };
 }
