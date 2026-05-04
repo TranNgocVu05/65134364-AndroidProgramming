@@ -1,5 +1,7 @@
 package tranngocvu.tranngocvu.vieccanlam;
 
+import java.util.HashMap;
+
 public class TASKS {
     String name;
     String date;
@@ -30,6 +32,15 @@ public class TASKS {
 
     public void setPriority(String priority) {
         this.priority = priority;
+    }
+    //
+    public HashMap<String, String> toFirebaseObject() {
+        HashMap<String, String>taskObject = new HashMap<String, String>();
+        taskObject.put("name", name);
+        taskObject.put("date",date);
+        taskObject.put("message",message);
+        taskObject.put("priority",priority);
+        return taskObject;
     }
 
 
