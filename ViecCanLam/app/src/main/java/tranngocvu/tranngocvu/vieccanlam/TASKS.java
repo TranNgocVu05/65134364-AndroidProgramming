@@ -1,25 +1,32 @@
 package tranngocvu.tranngocvu.vieccanlam;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+import java.io.Serializable;
 import java.util.HashMap;
+import java.util.Map;
 
-public class TASKS {
-    String name;
-    String date;
-    String message;
-    String priority;
+@IgnoreExtraProperties
+public class TASKS implements Serializable {
+    private String name;
+    private String date;
+    private String message;
+    private long priority; // Kiểu long để khớp với kiểu Number trên Firebase
 
-    public TASKS(String name, String date, String message, String priority) {
+    // 1. Constructor không tham số (Bắt buộc phải có để Firebase nạp dữ liệu)
+    public TASKS() {
+    }
+
+    // 2. Constructor có tham số đầy đủ
+    public TASKS(String name, String date, String message, long priority) {
         this.name = name;
         this.date = date;
         this.message = message;
         this.priority = priority;
     }
 
-    public TASKS() {
-    }
-
+    // 3. Đầy đủ Getter và Setter cho từng trường
     public String getName() {
-        return name;
+        return name != null ? name : "";
     }
 
     public void setName(String name) {
@@ -27,7 +34,7 @@ public class TASKS {
     }
 
     public String getDate() {
-        return date;
+        return date != null ? date : "";
     }
 
     public void setDate(String date) {
@@ -35,27 +42,28 @@ public class TASKS {
     }
 
     public String getMessage() {
-        return message;
+        return message != null ? message : "";
     }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public String getPriority() {
+    public long getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(long priority) {
         this.priority = priority;
     }
 
-    public HashMap<String, String> toFirebaseObject() {
-        HashMap<String, String> taskObject = new HashMap<String, String>();
-        taskObject.put("name", name);
-        taskObject.put("date", date);
-        taskObject.put("message", message);
-        taskObject.put("priority", priority);
-        return taskObject;
+    // 4. Hàm hỗ trợ chuyển đổi sang Map (Dùng khi bạn muốn đẩy dữ liệu lên Firebase)
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("name", name);
+        result.put("date", date);
+        result.put("message", message);
+        result.put("priority", priority);
+        return result;
     }
 }

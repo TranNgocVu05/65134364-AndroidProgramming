@@ -1,7 +1,10 @@
 package tranngocvu.tranngocvu.vieccanlam;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log; // Đã thêm import Log
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -9,7 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,7 +27,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    List<TASKS> lstVCL;
+    private List<TASKS> lstVCL;
+    private TaskRVadapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         lstVCL = new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.rcvCVL);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        
+        adapter = new TaskRVadapter(lstVCL);
+        recyclerView.setAdapter(adapter);
+
+
+        FloatingActionButton fab = findViewById(R.id.floatingActionButton);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, ThemTaskActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = database.getReference("TASKS");
@@ -42,19 +67,19 @@ public class MainActivity extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                lstVCL.clear();
                 for (DataSnapshot obj : snapshot.getChildren()) {
                     TASKS task = obj.getValue(TASKS.class);
                     if (task != null) {
                         lstVCL.add(task);
-                        Log.w("VCL app", "Ten Viec Can lam: " + task.getName());
                     }
                 }
-
+                adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-                Log.e("VCL app", "Lỗi đọc dữ liệu: " + error.getMessage());
+                Log.e("FIREBASE_LOG", "Lỗi: " + error.getMessage());
             }
         });
     }
