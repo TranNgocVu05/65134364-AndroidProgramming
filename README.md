@@ -49,3 +49,6 @@ lưu các bài thực hành , bài tập , dự án về Android
 
 ### Thêm Công việc
 <img width="431" height="794" alt="Screenshot 2026-05-11 042332" src="https://github.com/user-attachments/assets/3acc3e58-7a22-403d-9ef1-f3f295cd5593" />
+
+## bài điểm cộng đăng nhập đăng ký
+<img width="423" height="836" alt="Screenshot 2026-05-10 231825" src="https://github.com/user-attachments/assets/842518ee-68ab-4a08-93f8-8e5deb281f63" />
