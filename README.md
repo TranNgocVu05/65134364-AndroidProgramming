@@ -41,3 +41,11 @@ lưu các bài thực hành , bài tập , dự án về Android
 ### câu 4 Thông tin sinh viên
 
 <img width="368" height="776" alt="cau4thongtin" src="https://github.com/user-attachments/assets/f3f720b6-86e7-4487-b006-8150e839f0ea" />
+
+
+### Bài tập về nhà : APP VCL
+
+<img width="491" height="781" alt="Screenshot 2026-05-11 042317" src="https://github.com/user-attachments/assets/c7e657a6-005f-4cc1-8c35-36753e728160" />
+
+### Thêm Công việc
+<img width="431" height="794" alt="Screenshot 2026-05-11 042332" src="https://github.com/user-attachments/assets/3acc3e58-7a22-403d-9ef1-f3f295cd5593" />
